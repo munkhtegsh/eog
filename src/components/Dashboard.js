@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Card from '@material-ui/core/Card';
 import CardHeaderRaw from '@material-ui/core/CardHeader';
 import CardContent from '@material-ui/core/CardContent';
@@ -7,6 +7,8 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import {withStyles} from '@material-ui/core/styles';
 import AvatarRaw from '@material-ui/core/Avatar';
+import {connect} from 'react-redux';
+import * as actions from '../store/actions';
 
 const cardStyles = theme => ({
   root: {
@@ -36,29 +38,46 @@ const styles = {
   },
 };
 
-const Dashboard = props => {
-  const {classes} = props;
-  return (
-    <Card className={classes.card}>
-      <CardHeader title="Dashboard" />
-      <CardContent>
-        <List>
-          <ListItem>
-            <ListItemText primary="Temperature: " />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="Latitude: " />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="Longitude: " />
-          </ListItem>
-          <ListItem>
-            <ListItemText primary="Submit Your App" />
-          </ListItem>
-        </List>
-      </CardContent>
-    </Card>
-  );
-};
+class Dashboard extends Component {
+  componentDidMount() {
+    this.props.onLoad();
+  }
 
-export default withStyles(styles)(Dashboard);
+  render() {
+    const {classes} = this.props;
+    console.log(this.props);
+    return (
+      <Card className={classes.card}>
+        <CardHeader title="Dashboard" />
+        <CardContent>
+          <List>
+            <ListItem>
+              <ListItemText primary="Temperature: " />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary="Latitude: " />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary="Longitude: " />
+            </ListItem>
+            <ListItem>
+              <ListItemText primary="Submit Your App" />
+            </ListItem>
+          </List>
+        </CardContent>
+      </Card>
+    );
+  }
+}
+
+const mapDispatch = dispatch => ({
+  onLoad: () =>
+    dispatch({
+      type: actions.FETCH_DRONE,
+    }),
+});
+
+export default connect(
+  null,
+  mapDispatch,
+)(withStyles(styles)(Dashboard));
