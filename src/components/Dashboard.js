@@ -16,6 +16,7 @@ const cardStyles = theme => ({
     color: 'white',
   },
 });
+
 const CardHeader = withStyles(cardStyles)(CardHeaderRaw);
 
 const avatarStyles = theme => ({
@@ -35,27 +36,23 @@ const styles = {
   },
 };
 
-const NowWhat = props => {
+const Dashboard = props => {
   const {classes} = props;
   return (
     <Card className={classes.card}>
-      <CardHeader title="OK, munkhtegsh, you're all setup. Now What?" />
+      <CardHeader title="Dashboard" />
       <CardContent>
         <List>
           <ListItem>
-            <Avatar>1</Avatar>
-            <ListItemText primary="Connect to the Drone API" />
+            <ListItemText primary="Temperature: " />
           </ListItem>
           <ListItem>
-            <Avatar>2</Avatar>
-            <ListItemText primary="Create your Visualization" />
+            <ListItemText primary="Latitude: " />
           </ListItem>
           <ListItem>
-            <Avatar>3</Avatar>
-            <ListItemText primary="Poll the API" />
+            <ListItemText primary="Longitude: " />
           </ListItem>
           <ListItem>
-            <Avatar>4</Avatar>
             <ListItemText primary="Submit Your App" />
           </ListItem>
         </List>
@@ -64,4 +61,4 @@ const NowWhat = props => {
   );
 };
 
-export default withStyles(styles)(NowWhat);
+export default withStyles(styles)(Dashboard);
