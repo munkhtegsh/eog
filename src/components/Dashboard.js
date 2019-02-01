@@ -44,8 +44,15 @@ class Dashboard extends Component {
   }
 
   render() {
-    const {classes} = this.props;
-    console.log(this.props);
+    const {
+      classes,
+      temperature,
+      latitude,
+      longitude,
+      lastReceived,
+    } = this.props;
+    console.log(lastReceived);
+
     return (
       <Card className={classes.card}>
         <CardHeader title="Dashboard" />
@@ -53,15 +60,19 @@ class Dashboard extends Component {
           <List>
             <ListItem>
               <ListItemText primary="Temperature: " />
+              <ListItemText secondary={temperature} />
             </ListItem>
             <ListItem>
               <ListItemText primary="Latitude: " />
+              <ListItemText secondary={latitude} />
             </ListItem>
             <ListItem>
               <ListItemText primary="Longitude: " />
+              <ListItemText secondary={longitude} />
             </ListItem>
             <ListItem>
-              <ListItemText primary="Submit Your App" />
+              <ListItemText primary="Last Received" />
+              <ListItemText secondary={lastReceived} />
             </ListItem>
           </List>
         </CardContent>
@@ -69,6 +80,14 @@ class Dashboard extends Component {
     );
   }
 }
+
+const mapState = (state, ownProps) => ({
+  loading: state.drone.loading,
+  temperature: state.drone.temperature,
+  latitude: state.drone.latitude,
+  longitude: state.drone.longitude,
+  lastReceived: state.drone.lastReceived,
+});
 
 const mapDispatch = dispatch => ({
   onLoad: () =>
@@ -78,6 +97,6 @@ const mapDispatch = dispatch => ({
 });
 
 export default connect(
-  null,
+  mapState,
   mapDispatch,
 )(withStyles(styles)(Dashboard));

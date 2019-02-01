@@ -5,7 +5,7 @@ const initialState = {
   temperature: '',
   latitude: null,
   longitude: null,
-  lastRecieved: '',
+  lastReceived: '',
   data: {},
 };
 
@@ -22,7 +22,7 @@ const droneDataReceived = (state, action) => {
     latitude: latitude,
     longitude: longitude,
     temperature: metric,
-    lastRecieved: timestamp,
+    lastReceived: timestamp,
     data: action.data,
   };
 };
