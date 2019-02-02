@@ -9,6 +9,17 @@ import {withStyles} from '@material-ui/core/styles';
 import AvatarRaw from '@material-ui/core/Avatar';
 import {connect} from 'react-redux';
 import * as actions from '../store/actions';
+import {
+  LineChart,
+  Line,
+  CartesianGrid,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+  Label,
+} from 'recharts';
 
 const cardStyles = theme => ({
   root: {
@@ -38,38 +49,43 @@ const styles = {
   },
 };
 
-class Dashboard extends Component {
+class Chart extends Component {
   componentDidMount() {
     this.props.onLoad();
   }
 
   render() {
-    const {classes, metric, latitude, longitude, lastReceived} = this.props;
-    console.log(lastReceived);
+    const {
+      classes,
+      data,
+      metric,
+      latitude,
+      longitude,
+      lastReceived,
+    } = this.props;
 
     return (
       <Card className={classes.card}>
-        <CardHeader title="Dashboard" />
-        <CardContent>
-          <List>
-            <ListItem>
-              <ListItemText primary="Metric: " />
-              <ListItemText secondary={metric} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Latitude: " />
-              <ListItemText secondary={latitude} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Longitude: " />
-              <ListItemText secondary={longitude} />
-            </ListItem>
-            <ListItem>
-              <ListItemText primary="Last Received" />
-              <ListItemText secondary={lastReceived} />
-            </ListItem>
-          </List>
-        </CardContent>
+        <CardHeader title="Chart" style={{marginBottom: '2rem'}} />
+        <ResponsiveContainer width="90%" height="80%">
+          <LineChart width={730} height={250} data={data}>
+            <Label
+              value="Simple Drone Temperature"
+              offset={2}
+              position="Simple"
+            />
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis dataKey="timestamp" />
+            <YAxis
+              label={{value: 'Metrics', angle: -90, position: 'insideLeft'}}
+            />
+            <Tooltip
+              viewBox={{x: 0, y: 0, width: 400, height: 400}}
+              isAnimationActive={false}
+            />
+            <Line type="monotone" dataKey="metric" stroke="#8884d8" />
+          </LineChart>
+        </ResponsiveContainer>
       </Card>
     );
   }
@@ -81,6 +97,7 @@ const mapState = (state, ownProps) => ({
   latitude: state.drone.latitude,
   longitude: state.drone.longitude,
   lastReceived: state.drone.lastReceived,
+  data: state.drone.data.data,
 });
 
 const mapDispatch = dispatch => ({
@@ -93,4 +110,4 @@ const mapDispatch = dispatch => ({
 export default connect(
   mapState,
   mapDispatch,
-)(withStyles(styles)(Dashboard));
+)(withStyles(styles)(Chart));

@@ -73,7 +73,7 @@ function Sidebar(props) {
             </ListItemIcon>
             <ListItemText primary={'Dashboard Visualization'} />
           </ListItem>
-          <ListItem button component={Link} to="/showchart">
+          <ListItem button component={Link} to="/chart">
             <ListItemIcon>
               <ShowChart />
             </ListItemIcon>

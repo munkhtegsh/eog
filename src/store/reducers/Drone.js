@@ -2,7 +2,7 @@ import * as actions from '../actions';
 
 const initialState = {
   loading: false,
-  temperature: '',
+  metric: '',
   latitude: null,
   longitude: null,
   lastReceived: '',
@@ -21,7 +21,7 @@ const droneDataReceived = (state, action) => {
     ...state,
     latitude: latitude,
     longitude: longitude,
-    temperature: metric,
+    metric: metric,
     lastReceived: timestamp,
     data: action.data,
   };
