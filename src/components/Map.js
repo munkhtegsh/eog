@@ -51,13 +51,13 @@ class Map extends Component {
 
     return (
       <div>
-        {this.props.latitude ? (
+        {latitude ? (
           <Card className={classes.card}>
             <CardHeader title="Chart" />
             <ReactMapGL
               width="100%"
               height="100%"
-              zoom={8}
+              zoom={10}
               mapboxApiAccessToken={process.env.REACT_APP_SECRET_CODE}
               {...viewPort}
               onViewportChange={viewport => this.setState({viewport})}>
