@@ -1,5 +1,6 @@
 import 'isomorphic-fetch';
 
+// fetch drone API
 const getDroneData = async () => {
   const response = await fetch(
     `https://react-assessment-api.herokuapp.com/api/drone`,

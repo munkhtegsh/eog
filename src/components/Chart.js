@@ -97,7 +97,7 @@ const mapState = (state, ownProps) => ({
   latitude: state.drone.latitude,
   longitude: state.drone.longitude,
   lastReceived: state.drone.lastReceived,
-  data: state.drone.data.data,
+  data: state.drone.data,
 });
 
 const mapDispatch = dispatch => ({

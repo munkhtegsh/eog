@@ -9,6 +9,7 @@ import {withStyles} from '@material-ui/core/styles';
 import AvatarRaw from '@material-ui/core/Avatar';
 import {connect} from 'react-redux';
 import * as actions from '../store/actions';
+import {ToastContainer} from 'react-toastify';
 
 const cardStyles = theme => ({
   root: {
@@ -45,9 +46,9 @@ class Dashboard extends Component {
 
   render() {
     const {classes, metric, latitude, longitude, lastReceived} = this.props;
-    console.log(lastReceived);
+    console.log(this.props);
 
-    return (
+    return this.props.metric ? (
       <Card className={classes.card}>
         <CardHeader title="Dashboard" />
         <CardContent>
@@ -71,6 +72,8 @@ class Dashboard extends Component {
           </List>
         </CardContent>
       </Card>
+    ) : (
+      <ToastContainer />
     );
   }
 }
