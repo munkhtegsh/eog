@@ -17,17 +17,11 @@ const droneDataReceived = (state, action) => {
   const {data} = action.data;
   const {metric, latitude, longitude, timestamp} = data[data.length - 1];
 
-  let droneData = data.map(item => {
-    let date = new Date(item.timestamp).toString();
-    // let dateFormat = date
-    //   .split(' ')
-    //   .slice(1, 5)
-    //   .join(', ');
-    // item.timestamp = dateFormat;
-    // console.log(date.split(' ')[4].slice(0, 5));
+  let droneData = data.map(el => {
+    let date = new Date(el.timestamp).toString();
     let dateFormat = date.split(' ')[4].slice(0, 5);
-    item.timestamp = dateFormat;
-    return item;
+    el.timestamp = dateFormat;
+    return el;
   });
 
   return {

@@ -27,7 +27,7 @@ const styles = {
 
 class Map extends Component {
   state = {
-    viewport: {
+    viewPort: {
       latitude: 37.7577,
       longitude: -122.4376,
     },
@@ -60,7 +60,7 @@ class Map extends Component {
               zoom={10}
               mapboxApiAccessToken={process.env.REACT_APP_SECRET_CODE}
               {...viewPort}
-              onViewportChange={viewport => this.setState({viewport})}>
+              onViewportChange={viewport => this.setState({viewPort})}>
               <Marker
                 latitude={latitude}
                 longitude={longitude}
